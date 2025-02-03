@@ -5,12 +5,11 @@ const cors = require('cors');
 const app = express();
 app.use(express.json());
 
-
-// Enable CORS
 app.use(cors({
-    origin: 'https://fe2003.netlify.app', // Allow requests from your frontend
+    origin: '*', 
     credentials: true 
 }));
+
 
 const router = express.Router();
 
