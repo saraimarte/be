@@ -24,4 +24,20 @@ router.get('/', (req, res) => {
 // Ensure function is correctly mounted
 app.use('/.netlify/functions/api', router);
 
-module.exports.handler = serverless(app);
+const fetch = require('node-fetch');
+
+exports.handler = async function(event, context) {
+  const url = event.queryStringParameters.url;
+  const response = await fetch(url);
+  const data = await response.json();
+
+  return {
+    statusCode: 200,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers': 'Content-Type',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS'
+    },
+    body: JSON.stringify(data)
+  };
+};
