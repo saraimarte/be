@@ -1,10 +1,16 @@
 const express = require('express');
 const serverless = require('serverless-http');
-const cors=require('cors')
+const cors = require('cors');
 
 const app = express();
 app.use(express.json());
-app.use(cors({origin:true}))
+
+
+// Enable CORS
+app.use(cors({
+    origin: 'https://fe2003.netlify.app', // Allow requests from your frontend
+    credentials: true 
+}));
 
 const router = express.Router();
 
