@@ -5,16 +5,19 @@ const cors = require('cors');
 const app = express();
 app.use(express.json());
 
-const corsOptions = {
-  origin: ['https://fe2003.netlify.app'],
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
-  preflightContinue: false,
-  optionsSuccessStatus: 200,
-  credentials: false
-};
-
-app.use(cors(corsOptions));
-
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "https://fe2003.netlify.app");
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+    
+    // Handle preflight requests
+    if (req.method === "OPTIONS") {
+      return res.sendStatus(200);
+    }
+  
+    next();
+  });
+  
 const router = express.Router();
 
 router.get('/', (req, res) => {
