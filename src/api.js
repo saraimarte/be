@@ -6,13 +6,13 @@ app.use(express.json());
 
 // Middleware to set CORS headers manually
 app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'https://fe2003.netlify.app'); // Allow frontend domain
+    res.header('Access-Control-Allow-Origin', '*'); // Allow all origins, or specify the frontend domain
     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
     // Handle preflight requests
     if (req.method === 'OPTIONS') {
-        return res.status(204).end();
+        return res.status(204).end(); 
     }
 
     next();
@@ -24,7 +24,6 @@ router.get('/', (req, res) => {
     res.json({ 'msg': 'hello world' });
 });
 
-//Ensure function is correctly mounted
 app.use('/.netlify/functions/api', router);
 
 module.exports.handler = serverless(app);

@@ -1,15 +1,16 @@
 [build]
-
-    functions = "functions"
+  functions = "functions"
 
 [[redirects]]
-  from = "/api"  # Path you will use in frontend (e.g., /api will be mapped to external API)
-  to = "https://be2003.netlify.app/.netlify/functions/api"  # Your actual API URL
+  from = "/api"
+  to = "https://be2003.netlify.app/.netlify/functions/api"
   status = 200
   force = true
   headers = {X-From = "Netlify"}
 
 [[headers]]
-  for = "/api/*"  # Make sure this matches the proxy route above
+  for = "/api/*"
   [headers.values]
-    Access-Control-Allow-Origin = "*"  # Allow any origin
+    Access-Control-Allow-Origin = "*"  # Allow any origin (you could specify a specific origin if needed)
+    Access-Control-Allow-Methods = "GET, POST, PUT, DELETE, OPTIONS"
+    Access-Control-Allow-Headers = "Content-Type, Authorization"
