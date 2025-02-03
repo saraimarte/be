@@ -1,14 +1,7 @@
 [build]
-  functions = "functions"
+functions = "functions"
 
 [[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/api/:splat"
-  status = 200
-
-[[headers]]
-  for = "/.netlify/functions/api"
-  [headers.values]
-    Access-Control-Allow-Origin = "https://fe2003.netlify.app"
-    Access-Control-Allow-Methods = "GET, POST, PUT, DELETE, OPTIONS"
-    Access-Control-Allow-Headers = "Content-Type, Authorization"
+from = "/api/*"
+to = "/.netlify/functions/api/:splat"
+status = 200
