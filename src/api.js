@@ -5,21 +5,15 @@ const cors = require('cors');
 const app = express();
 app.use(express.json());
 
-// Enable CORS for frontend domain
 const corsOptions = {
-    origin: 'https://fe2003.netlify.app',
-    methods: 'GET, POST, PUT, DELETE, OPTIONS',
-    allowedHeaders: 'Content-Type, Authorization'
-};
-app.use(cors(corsOptions));
+    origin: ['https://fe2003.netlify.app'], 
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    preflightContinue:false,
+    optionsSuccessStatus: 200,
+    credentials: false
+}
 
-// Handle OPTIONS preflight requests manually
-app.options('*', (req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', 'https://fe2003.netlify.app');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    return res.status(204).end();
-});
+app.use(cors(corsOptions));
 
 const router = express.Router();
 
