@@ -1,5 +1,10 @@
 const express = require('express');
 const serverless = require('serverless-http');
+const cors = require('cors');
+
+app.use(cors({
+    origin: "*",
+}));
 
 const app = express();
 app.use(express.json());
@@ -11,6 +16,5 @@ router.get('/', (req, res) => {
 });
 
 app.use('/.netlify/functions/api', router);
-app.use(cors());
 
 module.exports.handler = serverless(app);
